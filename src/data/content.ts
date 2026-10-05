@@ -174,26 +174,6 @@ export const projects: Project[] = [
     github: '', // TODO: add repo link
     live: '',
   },
-  {
-    name: 'Chat485',
-    subtitle: 'Full-Stack LLM Chat App',
-    description:
-      'A ChatGPT-style chat app with a Flask backend, a 4-table SQLite schema, salted SHA-512 password hashing, and an OpenAI-compatible LLM API with a 20-message sliding context window.',
-    tech: ['Python', 'Flask', 'SQLite', 'React'],
-    image: '', // TODO: add screenshot, e.g. '/projects/chat485.png'
-    github: '', // TODO: add repo link
-    live: '',
-  },
-  {
-    name: 'Pipelined CPU & Cache Simulator',
-    subtitle: 'C Systems Project',
-    description:
-      'A cycle-accurate 5-stage pipelined processor simulator with data forwarding, load-use stalls, and branch flushes, plus a configurable cache with LRU replacement.',
-    tech: ['C'],
-    image: '', // TODO: add screenshot, e.g. '/projects/cpu-simulator.png'
-    github: '', // TODO: add repo link
-    live: '',
-  },
 ]
 
 // TODO: create a form at https://formspree.io and paste its endpoint here,

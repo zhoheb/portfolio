@@ -15,7 +15,7 @@ export default function Hero() {
           </span>
           <span className="hero-line">{hero.tagline}</span>
         </h1>
-        <a className="hero-button" href="#projects">
+        <a className="hero-button" href="#about">
           {hero.cta}
           <FaArrowDown aria-hidden="true" />
         </a>

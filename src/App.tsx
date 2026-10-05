@@ -19,8 +19,8 @@ export default function App() {
 
   return (
     <>
-      <Nav />
       <Hero />
+      <Nav />
       <main>
         <About />
         <Experience />
