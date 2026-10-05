@@ -22,11 +22,19 @@ styling or template swap.
 
 Still to fill in:
 
-- Project repo links: each project in `src/data/content.ts` has an empty `github` field marked with a TODO
+Still to fill in, all in `src/data/content.ts` (each is marked with a TODO):
+
+- Project links: `github` and `live` on each project. A link is hidden while its URL is empty.
+- Project screenshots: put images in `public/projects/` and set each project's `image`
+  (e.g. `'/projects/free-food-tracker.png'`). Until then a placeholder panel is shown.
+- `FORMSPREE_ENDPOINT`: create a form at [formspree.io](https://formspree.io) and paste its
+  endpoint. While it is empty, the contact form opens a pre-filled `mailto:` link instead.
+- `about.photo` (optional): a photo under `public/` to replace the avatar icon.
 
 The Resume link serves `public/resume.pdf`; replace that file to update it.
 
-Styling is a single file, [`src/styles.css`](src/styles.css).
+Styling is a single file, [`src/styles.css`](src/styles.css), with the colors defined as CSS
+variables at the top. The hero animation is [`src/components/ParticleCanvas.tsx`](src/components/ParticleCanvas.tsx).
 
 ## Deploy
 

@@ -1,14 +1,40 @@
 // All site text lives in this file. Edit here; the components just render it.
 
+export interface NavItem {
+  label: string
+  // Must match a section id: home, about, experience, projects, contact.
+  href: string
+}
+
 export interface Link {
   label: string
   href: string
+  // Picks the footer icon.
+  icon: 'github' | 'linkedin' | 'email' | 'resume'
+}
+
+export interface SkillTile {
+  label: string
+  // Picks the logo; see the icon map in src/components/About.tsx.
+  icon:
+    | 'python'
+    | 'cplusplus'
+    | 'typescript'
+    | 'javascript'
+    | 'react'
+    | 'nodejs'
+    | 'flask'
+    | 'postgresql'
+    | 'docker'
+    | 'git'
+    | 'aws'
+    | 'linux'
 }
 
 export interface ExperienceItem {
   role: string
   organization: string
-  // Optional line under the heading, e.g. the project or team name.
+  // Optional line next to the organization, e.g. the project or team name.
   subtitle?: string
   dates: string
   location: string
@@ -17,61 +43,85 @@ export interface ExperienceItem {
 
 export interface Project {
   name: string
+  // Project type, shown as the second line of the title.
+  subtitle: string
   description: string
   tech: string[]
   inProgress?: boolean
-  // Repo URL. Leave empty to render the project name without a link.
+  // Screenshot path under public/, e.g. '/projects/free-food-tracker.png'.
+  // Leave empty to show a placeholder panel with the project name.
+  image: string
+  // Links are hidden while their URL is empty.
   github: string
+  live: string
 }
 
-export interface SkillGroup {
-  label: string
-  items: string[]
-}
+export const siteName = 'Zachary Hoheb'
+
+export const nav: NavItem[] = [
+  { label: 'Home', href: '#home' },
+  { label: 'About', href: '#about' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Contact', href: '#contact' },
+]
 
 export const hero = {
-  name: 'Zachary Hoheb',
-  intro:
-    'CS + Math at the University of Michigan and full-stack engineer, looking for Summer 2027 software engineering internships.',
+  // Rendered as: {greeting}{firstName}{greetingEnd}, with firstName in the accent color.
+  greeting: "Hello, I'm ",
+  firstName: 'Zach',
+  greetingEnd: '.',
+  tagline: "I'm a full-stack software engineer.",
+  cta: 'View my work',
 }
 
 export const email = 'zhoheb@umich.edu'
 
 export const links: Link[] = [
-  { label: 'GitHub', href: 'https://github.com/zhoheb' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/zachary-hoheb' },
-  { label: 'Email', href: `mailto:${email}` },
+  { label: 'GitHub', href: 'https://github.com/zhoheb', icon: 'github' },
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/zachary-hoheb',
+    icon: 'linkedin',
+  },
+  { label: 'Email', href: `mailto:${email}`, icon: 'email' },
   // Served from public/resume.pdf
-  { label: 'Resume', href: '/resume.pdf' },
+  { label: 'Resume', href: '/resume.pdf', icon: 'resume' },
 ]
 
 export const about = {
+  // TODO (optional): add a photo under public/ (e.g. '/photo.jpg') to replace the avatar icon.
+  photo: '',
   paragraphs: [
     "I'm a Computer Science and Mathematics student in the LSA Honors Program at the University of Michigan, where I've kept a 4.0 GPA and been recognized with the Branstrom Freshman Prize and as a James B. Angell Scholar. As a full-stack intern at Altheros Capital, I built and shipped production features for the Midwest Health telehealth platform, including a provider availability system now used by 80 therapists. I also do systems and performance research on ArchSAT, a framework for analyzing how SAT solvers use hardware.",
   ],
   education: {
     school: 'University of Michigan',
-    location: 'Ann Arbor, MI',
     degree: 'B.S. Computer Science and Mathematics, LSA Honors Program',
     dates: 'May 2028',
-    gpa: '4.0/4.0',
+    gpa: '4.0',
     honors: [
       'Branstrom Freshman Prize (top 5%)',
       'James B. Angell Scholar',
       'University Honors',
     ],
-    coursework: [
-      'Data Structures & Algorithms',
-      'Computer Organization',
-      'Foundations of Computer Science',
-      'Web Systems',
-      'Machine Learning',
-      'Discrete Math',
-      'Probability',
-      'Linear Algebra',
-    ],
   },
 }
+
+export const skillTiles: SkillTile[] = [
+  { label: 'Python', icon: 'python' },
+  { label: 'C++', icon: 'cplusplus' },
+  { label: 'TypeScript', icon: 'typescript' },
+  { label: 'JavaScript', icon: 'javascript' },
+  { label: 'React', icon: 'react' },
+  { label: 'Node.js', icon: 'nodejs' },
+  { label: 'Flask', icon: 'flask' },
+  { label: 'PostgreSQL', icon: 'postgresql' },
+  { label: 'Docker', icon: 'docker' },
+  { label: 'Git', icon: 'git' },
+  { label: 'AWS', icon: 'aws' },
+  { label: 'Linux', icon: 'linux' },
+]
 
 export const experience: ExperienceItem[] = [
   {
@@ -105,84 +155,63 @@ export const experience: ExperienceItem[] = [
 export const projects: Project[] = [
   {
     name: 'Free Food Tracker',
+    subtitle: 'Campus Events Web App',
     description:
-      "A web app that aggregates 100+ free-food events per week across the University of Michigan campus into one searchable, time- and location-based feed so students don't miss them. Backed by a REST API and PostgreSQL schema for events, locations, and sources, with a scraper that ingests postings from campus event feeds.",
+      'A web app that aggregates 100+ free-food events per week across the University of Michigan campus into one searchable, time- and location-based feed.',
     tech: ['React', 'TypeScript', 'Express', 'PostgreSQL'],
     inProgress: true,
+    image: '', // TODO: add screenshot, e.g. '/projects/free-food-tracker.png'
     github: '', // TODO: add repo link
+    live: '', // TODO: add live app link, if any
   },
   {
     name: 'SuperSnakes',
+    subtitle: 'PyGame Snake Game',
     description:
-      'An event-driven game with real-time input, collisions, and power-ups at a 10ms input response time, sustaining 60 FPS through controlled frame timing and decoupled rendering in a modular object-oriented design.',
+      'An event-driven game with real-time input, collisions, and power-ups that sustains 60 FPS through controlled frame timing and decoupled rendering.',
     tech: ['Python', 'PyGame'],
+    image: '', // TODO: add screenshot, e.g. '/projects/supersnakes.png'
     github: '', // TODO: add repo link
+    live: '',
   },
   {
     name: 'Chat485',
+    subtitle: 'Full-Stack LLM Chat App',
     description:
-      'A full-stack, ChatGPT-style LLM chat app built for EECS 485. The Flask backend has a 4-table SQLite schema, database-backed UUID session cookies, salted SHA-512 password hashing, and an OpenAI-compatible LLM API integration with a 20-message sliding context window.',
+      'A ChatGPT-style chat app with a Flask backend, a 4-table SQLite schema, salted SHA-512 password hashing, and an OpenAI-compatible LLM API with a 20-message sliding context window.',
     tech: ['Python', 'Flask', 'SQLite', 'React'],
+    image: '', // TODO: add screenshot, e.g. '/projects/chat485.png'
     github: '', // TODO: add repo link
+    live: '',
   },
   {
     name: 'Pipelined CPU & Cache Simulator',
+    subtitle: 'C Systems Project',
     description:
-      'A cycle-accurate 5-stage pipelined processor simulator with data forwarding, load-use stalls, and branch flushes, along with a two-pass assembler and a multi-file linker, built for EECS 370. Includes a configurable cache (block size, sets, associativity) with LRU replacement and write-back, write-allocate policies.',
+      'A cycle-accurate 5-stage pipelined processor simulator with data forwarding, load-use stalls, and branch flushes, plus a configurable cache with LRU replacement.',
     tech: ['C'],
+    image: '', // TODO: add screenshot, e.g. '/projects/cpu-simulator.png'
     github: '', // TODO: add repo link
+    live: '',
   },
 ]
 
-export const skills: SkillGroup[] = [
-  {
-    label: 'Languages',
-    items: [
-      'Python',
-      'C++',
-      'C',
-      'TypeScript',
-      'JavaScript',
-      'Java',
-      'SQL',
-      'HTML/CSS',
-      'Bash',
-    ],
-  },
-  {
-    label: 'Frameworks & Libraries',
-    items: [
-      'React',
-      'Node.js',
-      'Express.js',
-      'Flask',
-      'Tailwind CSS',
-      'Dash',
-      'Plotly',
-      'NumPy',
-      'Pandas',
-      'scikit-learn',
-    ],
-  },
-  {
-    label: 'Tools & Platforms',
-    items: [
-      'Git',
-      'Docker',
-      'PostgreSQL',
-      'SQLite',
-      'AWS Cognito',
-      'Stripe',
-      'Postman',
-      'pytest',
-      'Cypress',
-      'Linux',
-      'VTune',
-    ],
-  },
-]
+// TODO: create a form at https://formspree.io and paste its endpoint here,
+// e.g. 'https://formspree.io/f/abcdwxyz'. While this is empty, the contact
+// form falls back to opening a mailto: link with the fields filled in.
+export const FORMSPREE_ENDPOINT = ''
 
 export const contact = {
   blurb:
-    "If you're recruiting for Summer 2027 software engineering internships, I'd be glad to hear from you. Email is the best way to reach me.",
+    "If you're recruiting for Summer 2027 software engineering internships, I'd be glad to hear from you.",
+  namePlaceholder: 'Name',
+  emailPlaceholder: 'Email',
+  messagePlaceholder: 'Message',
+  submit: 'Submit',
+  sending: 'Sending…',
+  success: "Thanks for reaching out. I'll get back to you soon.",
+  error: `Something went wrong. Please email me directly at ${email}.`,
+  mailtoNotice:
+    'Your email app should open with the message filled in. Send it from there.',
+  mailtoSubject: 'Portfolio contact from',
 }
