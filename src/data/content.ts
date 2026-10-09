@@ -179,7 +179,7 @@ export const projects: Project[] = [
 // TODO: create a form at https://formspree.io and paste its endpoint here,
 // e.g. 'https://formspree.io/f/abcdwxyz'. While this is empty, the contact
 // form falls back to opening a mailto: link with the fields filled in.
-export const FORMSPREE_ENDPOINT = ''
+export const FORMSPREE_ENDPOINT = 'https://formspree.io/f/maeqjydk'
 
 export const contact = {
   blurb:
