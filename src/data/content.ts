@@ -43,15 +43,22 @@ export interface ExperienceItem {
 
 export interface Project {
   name: string
-  // Project type, shown as the second line of the title.
-  subtitle: string
+  // Small uppercase label above the name, e.g. 'Personal project · Game'.
+  label: string
+  // Optional highlight stat, shown as a badge next to the label.
+  badge?: string
+  // One sentence, about 120 characters at most.
   description: string
+  // Up to 3 short bullet points under the description.
+  highlights: string[]
   tech: string[]
-  inProgress?: boolean
-  // Screenshot path under public/, e.g. '/projects/free-food-tracker.png'.
+  // Image path under public/, e.g. '/projects/cache-simulator.png'. Use a
+  // 16:10 image; other shapes are cropped to fit, keeping the top.
   // Leave empty to show a placeholder panel with the project name.
   image: string
-  // Links are hidden while their URL is empty.
+  // Alt text for the image. Defaults to '{name} screenshot'.
+  imageAlt?: string
+  // Buttons are hidden while their URL is empty.
   github: string
   live: string
 }
@@ -90,8 +97,8 @@ export const links: Link[] = [
 ]
 
 export const about = {
-  // TODO (optional): add a photo under public/ (e.g. '/photo.jpg') to replace the avatar icon.
-  photo: '',
+  // Photo under public/. Leave empty to show the avatar icon instead.
+  photo: '/profile-photo.jpg',
   paragraphs: [
     "I'm a Computer Science and Mathematics student in the LSA Honors Program at the University of Michigan, where I've kept a 4.0 GPA and been recognized with the Branstrom Freshman Prize and as a James B. Angell Scholar. As a full-stack intern at Altheros Capital, I built and shipped production features for the Midwest Health telehealth platform, including a provider availability system now used by 80 therapists. I also do systems and performance research on ArchSAT, a framework for analyzing how SAT solvers use hardware.",
   ],
@@ -154,31 +161,56 @@ export const experience: ExperienceItem[] = [
 // Rendered in this order.
 export const projects: Project[] = [
   {
-    name: 'Free Food Tracker',
-    subtitle: 'Campus Events Web App',
+    name: 'Maize Bites',
+    label: 'Personal project · Full-stack',
+    badge: '100+ daily users',
     description:
-      'A web app that aggregates 100+ free-food events per week across the University of Michigan campus into one searchable, time- and location-based feed.',
-    tech: ['React', 'TypeScript', 'Express', 'PostgreSQL'],
-    inProgress: true,
-    image: '', // TODO: add screenshot, e.g. '/projects/free-food-tracker.png'
-    github: '', // TODO: add repo link
-    live: '', // TODO: add live app link, if any
+      'A web app that maps free food across the University of Michigan campus in real time.',
+    highlights: [
+      'Official access to the Happening @ Michigan feed via U-M Student Life; a scheduled pipeline classifies and geolocates events across 73 buildings',
+      'TypeScript monorepo: React 19 PWA, Express 5 API, and a 16-table PostgreSQL schema',
+      'Runs at $0/month on Vercel, Render, and Neon, with 1,079 tests in CI',
+    ],
+    tech: ['TypeScript', 'React', 'Express', 'PostgreSQL', 'GitHub Actions'],
+    image: '/projects/maize-bites.png',
+    github: 'https://github.com/zhoheb/maize-bites',
+    live: 'https://maizebites.zachhoheb.dev',
   },
   {
     name: 'SuperSnakes',
-    subtitle: 'PyGame Snake Game',
+    label: 'Personal project · Game',
     description:
-      'An event-driven game with real-time input, collisions, and power-ups that sustains 60 FPS through controlled frame timing and decoupled rendering.',
+      'An arcade snake game in Python with power-ups, upgrades, and an in-game shop.',
+    highlights: [
+      '5 power-up types with a 10ms input response time',
+      'Steady 60 FPS through controlled frame timing and decoupled rendering',
+      '12 encapsulated classes (~2,000 lines) of modular, object-oriented code',
+    ],
     tech: ['Python', 'PyGame'],
-    image: '', // TODO: add screenshot, e.g. '/projects/supersnakes.png'
-    github: '', // TODO: add repo link
+    image: '/projects/supersnakes.png',
+    github: 'https://github.com/zhoheb/super_snakes',
+    live: '',
+  },
+  {
+    name: 'Configurable Cache Simulator',
+    label: 'EECS 370 · Systems',
+    description:
+      'A configurable cache simulator in C between a processor simulator and main memory.',
+    highlights: [
+      'Direct-mapped through fully associative designs, up to 65,536 words',
+      'True LRU replacement with write-back, write-allocate policies',
+      'Validated across 8 cache geometries with 10 test programs',
+    ],
+    tech: ['C'],
+    image: '/projects/cache-simulator.png',
+    imageAlt:
+      'Diagram of a 16-bit address split into tag, set, and offset fields, mapped onto a 2-way set-associative cache',
+    // Course code covered by the honor code: no links.
+    github: '',
     live: '',
   },
 ]
 
-// TODO: create a form at https://formspree.io and paste its endpoint here,
-// e.g. 'https://formspree.io/f/abcdwxyz'. While this is empty, the contact
-// form falls back to opening a mailto: link with the fields filled in.
 export const FORMSPREE_ENDPOINT = 'https://formspree.io/f/maeqjydk'
 
 export const contact = {
